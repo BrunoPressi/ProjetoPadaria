@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Lista de Clientes</a>
+          <a class="navbar-brand" href="#">Lista de Funcionários</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,7 +22,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./clienteFormInsert.html">Cadastrar</a>
+                <a class="nav-link" href="./funcionarioFormInsert.html">Cadastrar</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -40,6 +40,8 @@
                     <th scope="col">Nome</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Telefone</th>
+                    <th scope="col">Salário</th>
+                    <th scope="col">Cargo</th>
                     <th scope="col">Editar?</th>
                     <th scope="col">Excluir?</th>
                 </tr>
@@ -47,11 +49,14 @@
             <tbody>
                 <?php
 
+                ini_set('error_reporting', E_ALL);
+                ini_set('display_errors', 1);
+
                 include_once('../conexao.php');
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM cliente";
+                $query = "SELECT * FROM funcionario";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {
@@ -61,6 +66,8 @@
                     <td scope="row"><?php echo $i['nome'];?></td>
                     <td scope="row"><?php echo $i['cpf'];?></td>
                     <td scope="row"><?php echo $i['telefone'];?></td>
+                    <td scope="row"><?php echo $i['salario'];?></td>
+                    <td scope="row"><?php echo $i['cargo'];?></td>
                     <td scope="row"><a href="<?php echo "./clienteFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
                     <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']?>">Excluir</a></td>
                 </tr>
