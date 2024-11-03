@@ -66,10 +66,10 @@
                     <td scope="row"><?php echo $i['nome'];?></td>
                     <td scope="row"><?php echo $i['cpf'];?></td>
                     <td scope="row"><?php echo $i['telefone'];?></td>
-                    <td scope="row"><?php echo $i['salario'];?></td>
+                    <td scope="row"><?php echo "R$ ".$i['salario'];?></td>
                     <td scope="row"><?php echo $i['cargo'];?></td>
-                    <td scope="row"><a href="<?php echo "./clienteFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
-                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']?>">Excluir</a></td>
+                    <td scope="row"><a href="<?php echo "./funcionarioFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
+                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']."&tabela=funcionarios"?>">Excluir</a></td>
                 </tr>
             </tbody>
                 <?php

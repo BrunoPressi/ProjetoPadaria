@@ -62,7 +62,7 @@
                     <td scope="row"><?php echo $i['cpf'];?></td>
                     <td scope="row"><?php echo $i['telefone'];?></td>
                     <td scope="row"><a href="<?php echo "./clienteFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
-                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']?>">Excluir</a></td>
+                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']."&tabela=clientes"?>">Excluir</a></td>
                 </tr>
             </tbody>
                 <?php

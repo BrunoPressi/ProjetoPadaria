@@ -5,18 +5,34 @@ ini_set('display_errors', 1);
 
 include_once("../conexao.php");
 
-function deleteCliente($cliente_id) {
+$tabela = (string) filter_input(INPUT_GET, 'tabela');
+$id = filter_input(INPUT_GET, 'var_id');
+
+function deleteCliente($id) {
     $conexao = conexaoMYSQL();
 
-    $query = "DELETE FROM cliente WHERE id = {$cliente_id}";
+    $query = "DELETE FROM cliente WHERE id = {$id}";
 
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
 }
 
-$cliente_id = filter_input(INPUT_GET, "var_id");
-deleteCliente($cliente_id);
-header("Location: ../páginasClientes/listarClientes.php");
+function deleteFuncionario($id) {
+    $conexao = conexaoMYSQL();
 
+    $query = "DELETE FROM funcionario WHERE id = {$id}";
+
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+if($tabela === "clientes") {
+    deleteCliente($id);
+    header("Location: ../páginasClientes/listarClientes.php");
+}
+else if($tabela === "funcionarios") {
+    deleteFuncionario($id);
+    header("Location: ../páginasFuncionários/listarFuncionarios.php");
+}
 
 ?>
