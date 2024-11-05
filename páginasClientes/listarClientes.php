@@ -22,7 +22,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./clienteFormInsert.html">Cadastrar</a>
+                <a class="nav-link" href="./clienteFormInsert.php">Cadastrar</a>
               </li>
             </ul>
             <form class="d-flex" role="search">

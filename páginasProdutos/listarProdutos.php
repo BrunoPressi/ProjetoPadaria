@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../imgs/person-solid.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Funcionários</title>
+    <title>Produtos</title>
 </head>
 <body>
 
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Lista de Funcionários</a>
+          <a class="navbar-brand" href="#">Lista de Produtos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,11 +22,11 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./funcionarioFormInsert.php">Cadastrar</a>
+                <a class="nav-link" href="./produtoFormInsert.php">Cadastrar</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="text" placeholder="Pesquisar Funcionário" aria-label="Search" id="barra_Pesquisa" onkeyup="pesquisar()">
+                <input class="form-control me-2" type="text" placeholder="Pesquisar Produto" aria-label="Search" id="barra_Pesquisa" onkeyup="pesquisar()">
             </form>
           </div>
         </div>
@@ -36,12 +36,11 @@
         <table class="table table-dark table-striped" id="tabela_Clientes">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Código</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Salário</th>
-                    <th scope="col">Cargo</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Quantidade Em Estoque</th>
                     <th scope="col">Editar?</th>
                     <th scope="col">Excluir?</th>
                 </tr>
@@ -56,20 +55,19 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM funcionario";
+                $query = "SELECT * FROM produto";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {
                 ?>
                 <tr>
-                    <th scope="row" id="idCliente"><?php echo $i['id'];?></th>
+                    <th scope="row" id="idCliente"><?php echo $i['codigo'];?></th>
                     <td scope="row"><?php echo $i['nome'];?></td>
-                    <td scope="row"><?php echo $i['cpf'];?></td>
-                    <td scope="row"><?php echo $i['telefone'];?></td>
-                    <td scope="row"><?php echo "R$ ".$i['salario'];?></td>
-                    <td scope="row"><?php echo $i['cargo'];?></td>
-                    <td scope="row"><a href="<?php echo "./funcionarioFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
-                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']."&tabela=funcionarios"?>">Excluir</a></td>
+                    <td scope="row"><?php echo "R$ ".$i['preco'];?></td>
+                    <td scope="row"><?php echo $i['categoria'];?></td>
+                    <td scope="row"><?php echo $i['quantidadeEstoque'];?></td>
+                    <td scope="row"><a href="<?php echo "./produtoFormUpdate.php? var_id=".$i['codigo']?>">Editar</a></td>
+                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['codigo']."&tabela=produtos"?>">Excluir</a></td>
                 </tr>
             </tbody>
                 <?php

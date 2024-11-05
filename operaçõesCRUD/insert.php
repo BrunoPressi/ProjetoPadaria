@@ -21,13 +21,26 @@ function insertFuncionario($id, $cpf, $nome, $telefone, $salario, $cargo) {
     mysqli_close($conexao);
 }
 
+function insertProduto($codigo, $nome, $preco, $categoria, $quantidadeEstoque) {
+    $conexao = conexaoMYSQL();
+    $query = "INSERT INTO produto(codigo, nome, preco, categoria, quantidadeEstoque) VALUES({$codigo}, '{$nome}', {$preco}, '{$categoria}', {$quantidadeEstoque})";
+
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
 
 if($_POST['tabela'] == 'cliente') {
     insertCliente($_POST['cliente_id'], $_POST['cliente_cpf'], $_POST['cliente_nome'], $_POST['cliente_telefone']);
     header('Location: ../páginasClientes/listarClientes.php');
-}if($_POST['tabela'] == 'funcionário') {
+}
+if($_POST['tabela'] == 'funcionário') {
     insertFuncionario($_POST['funcionario_id'], $_POST['funcionario_cpf'], $_POST['funcionario_nome'], $_POST['funcionario_telefone'], $_POST['funcionario_salario'], $_POST['funcionario_cargo']);
     header('Location: ../páginasFuncionários/listarFuncionarios.php');
+}
+if($_POST['tabela'] == 'produto') {
+    insertProduto($_POST['produto_codigo'], $_POST['produto_nome'], $_POST['produto_preco'], $_POST['produto_categoria'], $_POST['produto_quantidade']);
+    header("Location: ../páginasProdutos/listarProdutos.php");
 }
 
 ?>

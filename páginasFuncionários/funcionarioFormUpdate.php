@@ -77,7 +77,7 @@
                 <label class="form-label">Cargo</label>
                 <input type="text" class="form-control" name="funcionario_cargo" placeholder="Ex: Atendente" value="<?php echo $i['cargo'] ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Editar Funcionário</button>
             </fieldset>
         </form>
     </div>
