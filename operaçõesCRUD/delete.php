@@ -8,6 +8,8 @@ include_once("../conexao.php");
 $tabela = (string) filter_input(INPUT_GET, 'tabela');
 $id = filter_input(INPUT_GET, 'var_id');
 
+#--------------------------------
+
 function deleteCliente($id) {
     $conexao = conexaoMYSQL();
 
@@ -16,6 +18,8 @@ function deleteCliente($id) {
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
 }
+
+#--------------------------------
 
 function deleteFuncionario($id) {
     $conexao = conexaoMYSQL();
@@ -26,6 +30,8 @@ function deleteFuncionario($id) {
     mysqli_close($conexao);
 }
 
+#--------------------------------
+
 function deleteProduto($id) {
     $conexao = conexaoMYSQL();
 
@@ -34,6 +40,19 @@ function deleteProduto($id) {
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
 }
+
+#--------------------------------
+
+function deleteVenda($id) {
+    $conexao = conexaoMYSQL();
+
+    $query = "DELETE FROM venda WHERE codigo = {$id}";
+
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+#--------------------------------
 
 if($tabela === "clientes") {
     deleteCliente($id);
@@ -46,6 +65,10 @@ else if($tabela === "funcionarios") {
 else if($tabela === "produtos") {
     deleteProduto($id);
     header("Location: ../páginasProdutos/listarProdutos.php");
+}
+else if($tabela === "vendas") {
+    deleteVenda($id);
+    header("Location: ../PáginasVendas/listarVendas.php");
 }
 
 ?>
