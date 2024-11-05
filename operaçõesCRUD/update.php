@@ -10,6 +10,7 @@ function atualizarCliente($id, $nome, $telefone) {
 
     $query = "UPDATE cliente SET nome = '{$nome}', telefone = '{$telefone}' WHERE id = {$id}";
     mysqli_query($conexao, $query);
+    mysqli_close($conexao);
 }
 
 function atualizarFuncionario($id, $nome, $telefone, $salario, $cargo) {
@@ -17,6 +18,15 @@ function atualizarFuncionario($id, $nome, $telefone, $salario, $cargo) {
 
     $query = "UPDATE funcionario SET nome = '{$nome}', telefone = '{$telefone}', salario = {$salario}, cargo = '{$cargo}' WHERE id = {$id}";
     mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+function atualizarProduto($codigo, $nome, $preco, $categoria, $quantidadeEstoque) {
+    $conexao = conexaoMYSQL();
+
+    $query = "UPDATE produto SET nome = '{$nome}', preco = {$preco}, categoria = '{$categoria}', quantidadeEstoque = {$quantidadeEstoque} WHERE codigo = {$codigo}";
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
 }
 
 if($_POST['tabela'] === 'cliente') {
@@ -26,6 +36,10 @@ if($_POST['tabela'] === 'cliente') {
 else if($_POST['tabela'] === 'funcionario') {
     atualizarFuncionario($_POST['funcionario_id'], $_POST['funcionario_nome'], $_POST['funcionario_telefone'], $_POST['funcionario_salario'], $_POST['funcionario_cargo']);
     header("Location: ../páginasFuncionários/listarFuncionarios.php");
+}
+else if($_POST['tabela'] === 'produtos') {
+    atualizarProduto($_POST['produto_codigo'], $_POST['produto_nome'], $_POST['produto_preco'], $_POST['produto_categoria'], $_POST['produto_estoque']);
+    header("Location: ../páginasProdutos/listarProdutos.php");
 }
 
 ?>

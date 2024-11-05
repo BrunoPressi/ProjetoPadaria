@@ -23,9 +23,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="./listarClientes.php">Clientes</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Produtos</a>
-              </li>
             </ul>
           </div>
         </div>
@@ -69,7 +66,7 @@
                 <label class="form-label">Telefone</label>
                 <input type="text" class="form-control" name="cliente_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999" value="<?php echo $i['telefone'] ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Editar Cliente</button>
             </fieldset>
         </form>
     </div>

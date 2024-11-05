@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../imgs/address-card-solid.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Edição de Funcionários</title>
+    <title>Cadastro de Clientes</title>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Edição de Funcionários</a>
+          <a class="navbar-brand" href="#">Cadastro de Clientes</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -21,63 +21,51 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./listarFuncionarios.php">Funcionários</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Produtos</a>
+                <a class="nav-link" href="./listarClientes.php">Clientes</a>
               </li>
             </ul>
           </div>
         </div>
     </nav>
 
-    <?php
+    <?php 
 
-    ini_set('error_reporting', E_ALL);
-    ini_set('display_errors', 1);
-
-    include_once('../conexao.php');
+    include_once ('../conexao.php');
 
     $conexao = conexaoMYSQL();
 
-    $funcionario_id = filter_input(INPUT_GET, "var_id");
-
-    $query = "SELECT * FROM funcionario WHERE id = {$funcionario_id}";
+    $query = "SELECT id FROM cliente ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($conexao, $query);
     $i = mysqli_fetch_assoc($result);
+
+    if($i === null ) {
+        $i['id'] = 0;
+    }
 
     ?>
     
     <div class="d-flex justify-content-center">
-        <form method="POST" action="../operaçõesCRUD/update.php">
+        <form method="POST" action="../operaçõesCRUD/insert.php">
             <fieldset>
-            <legend class="m-4">Editar Funcionário</legend>
-            <input type="hidden" name="tabela" value="funcionario">
+            <legend class="m-4">Cadastrar Cliente</legend>
+            <input type="hidden" name="tabela" value="cliente">
             <div class="mb-3">
                 <label class="form-label">ID</label>
-                <input type="text" class="form-control" name="funcionario_id" value="<?php echo $i['id']?>" readonly>
+                <input type="text" class="form-control" name="cliente_id" placeholder="Preencha com o ID" value="<?php echo $i['id'] + 1;?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nome</label>
-                <input type="text" class="form-control" name="funcionario_nome" placeholder="Preencha com o nome" value="<?php echo $i['nome']?>" required>
+                <input type="text" class="form-control" name="cliente_nome" placeholder="Preencha com o nome" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">CPF</label>
-                <input type="text" class="form-control" name="funcionario_cpf" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" placeholder="000.000.000-00" value="<?php echo $i['cpf']?>" readonly>
+                <input type="text" class="form-control" name="cliente_cpf" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" placeholder="000.000.000-00" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Telefone</label>
-                <input type="text" class="form-control" name="funcionario_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999" value="<?php echo $i['telefone'] ?>">
+                <input type="text" class="form-control" name="cliente_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999">
             </div>
-            <div class="mb-3">
-                <label class="form-label">Salário</label>
-                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+$" placeholder="Ex: 2000" value="<?php echo $i['salario'] ?>">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Cargo</label>
-                <input type="text" class="form-control" name="funcionario_cargo" placeholder="Ex: Atendente" value="<?php echo $i['cargo'] ?>">
-            </div>
-            <button type="submit" class="btn btn-primary">Editar Funcionário</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
             </fieldset>
         </form>
     </div>

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../imgs/address-card-solid.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Cadastro de Funcionários</title>
+    <title>Edição de Produtos</title>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Cadastro de Funcionários</a>
+          <a class="navbar-brand" href="#">Edição de Produtos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -21,43 +21,56 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="../páginasFuncionários/listarFuncionarios.php">Funcionários</a>
+                <a class="nav-link" href="./listarProdutos.php">Produtos</a>
               </li>
             </ul>
           </div>
         </div>
     </nav>
+
+    <?php
+
+    ini_set('error_reporting', E_ALL);
+    ini_set('display_errors', 1);
+
+    include_once('../conexao.php');
+
+    $conexao = conexaoMYSQL();
+
+    $codigo_produto = filter_input(INPUT_GET, "var_id");
+
+    $query = "SELECT * FROM produto WHERE codigo = {$codigo_produto}";
+    $result = mysqli_query($conexao, $query);
+    $i = mysqli_fetch_assoc($result);
+
+    ?>
     
     <div class="d-flex justify-content-center">
-        <form method="POST" action="../operaçõesCRUD/insert.php">
+        <form method="POST" action="../operaçõesCRUD/update.php">
             <fieldset>
-            <legend class="m-4">Cadastrar Funcionário</legend>
-            <input type="hidden" name="tabela" value="funcionário">
+            <legend class="m-4">Editar Produto</legend>
+            <input type="hidden" name="tabela" value="produtos">
             <div class="mb-3">
-                <label class="form-label">ID</label>
-                <input type="text" class="form-control" name="funcionario_id" placeholder="Preencha com o ID" required>
+                <label class="form-label">Código</label>
+                <input type="text" class="form-control" name="produto_codigo" value="<?php echo $i['codigo']?>" readonly>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nome</label>
-                <input type="text" class="form-control" name="funcionario_nome" placeholder="Preencha com o nome" required>
+                <input type="text" class="form-control" name="produto_nome" placeholder="Preencha com o nome" value="<?php echo $i['nome']?>" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">CPF</label>
-                <input type="text" class="form-control" name="funcionario_cpf" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" placeholder="000.000.000-00" required>
+                <label class="form-label">Preço</label>
+                <input type="text" class="form-control" name="produto_preco" value="<?php echo $i['preco']?>" readonly>
             </div>
             <div class="mb-3">
-                <label class="form-label">Telefone</label>
-                <input type="text" class="form-control" name="funcionario_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999">
+                <label class="form-label">Categoria</label>
+                <input type="text" class="form-control" name="produto_categoria" value="<?php echo $i['categoria'] ?>">
             </div>
             <div class="mb-3">
-                <label class="form-label">Cargo</label>
-                <input type="text" class="form-control" name="funcionario_cargo" placeholder="Ex: Atendente">
+                <label class="form-label">Quantidade em Estoque</label>
+                <input type="text" class="form-control" name="produto_estoque" placeholder="Ex: 2000" value="<?php echo $i['quantidadeEstoque'] ?>">
             </div>
-            <div class="mb-3">
-                <label class="form-label">Salário</label>
-                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+$" placeholder="Ex: 2.500,00" required required>
-            </div>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Editar Produto</button>
             </fieldset>
         </form>
     </div>

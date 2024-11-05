@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../imgs/address-card-solid.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Cadastro de Clientes</title>
+    <title>Cadastro de Produtos</title>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Cadastro de Clientes</a>
+          <a class="navbar-brand" href="#">Cadastro de Produtos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -21,33 +21,53 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./listarClientes.php">Clientes</a>
+                <a class="nav-link" href="./listarProdutos.php">Produtos</a>
               </li>
             </ul>
           </div>
         </div>
     </nav>
+
+    <?php 
+
+    include_once ('../conexao.php');
+
+    $conexao = conexaoMYSQL();
+
+    $query = "SELECT codigo FROM produto ORDER BY codigo DESC LIMIT 1";
+    $result = mysqli_query($conexao, $query);
+    $i = mysqli_fetch_assoc($result);
+
+    if($i === null) {
+        $i['codigo'] = 0;
+    }
+
+    ?>
     
     <div class="d-flex justify-content-center">
         <form method="POST" action="../operaçõesCRUD/insert.php">
             <fieldset>
-            <legend class="m-4">Cadastrar Cliente</legend>
-            <input type="hidden" name="tabela" value="cliente">
+            <legend class="m-4">Cadastrar Produto</legend>
+            <input type="hidden" name="tabela" value="produto">
             <div class="mb-3">
-                <label class="form-label">ID</label>
-                <input type="text" class="form-control" name="cliente_id" placeholder="Preencha com o ID" required>
+                <label class="form-label">Código</label>
+                <input type="text" class="form-control" name="produto_codigo" placeholder="Preencha com o Código" value="<?php echo $i['codigo'] + 1 ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nome</label>
-                <input type="text" class="form-control" name="cliente_nome" placeholder="Preencha com o nome" required>
+                <input type="text" class="form-control" name="produto_nome" placeholder="Preencha com o nome" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">CPF</label>
-                <input type="text" class="form-control" name="cliente_cpf" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" placeholder="000.000.000-00" required>
+                <label class="form-label">Preço</label>
+                <input  class="form-control" name="produto_preco" placeholder="Preencha com o preço" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Telefone</label>
-                <input type="text" class="form-control" name="cliente_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999">
+                <label class="form-label">Categoria</label>
+                <input type="text" class="form-control" name="produto_categoria" placeholder="Ex: Pães">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Quantidade em Estoque</label>
+                <input class="form-control" name="produto_quantidade" placeholder="Preencha a quantidade">
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             </fieldset>
