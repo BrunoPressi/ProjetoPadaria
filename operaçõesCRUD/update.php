@@ -21,10 +21,10 @@ function atualizarFuncionario($id, $nome, $telefone, $salario, $cargo) {
     mysqli_close($conexao);
 }
 
-function atualizarProduto($codigo, $nome, $preco, $categoria, $quantidadeEstoque) {
+function atualizarProduto($codigo, $nome, $preco, $categoria, $quantidade_em_estoque) {
     $conexao = conexaoMYSQL();
 
-    $query = "UPDATE produto SET nome = '{$nome}', preco = {$preco}, categoria = '{$categoria}', quantidadeEstoque = {$quantidadeEstoque} WHERE codigo = {$codigo}";
+    $query = "UPDATE produto SET nome = '{$nome}', preco = {$preco}, categoria = '{$categoria}', quantidade_em_estoque = {$quantidade_em_estoque} WHERE codigo = {$codigo}";
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
 }

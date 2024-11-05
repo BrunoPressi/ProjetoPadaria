@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../imgs/address-card-solid.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="../icons/address-card-solid.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Edição de Produtos</title>
 </head>
@@ -60,15 +60,23 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Preço</label>
-                <input type="text" class="form-control" name="produto_preco" value="<?php echo $i['preco']?>" readonly>
+                <input type="text" class="form-control" name="produto_preco" value="<?php echo $i['preco']?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
-                <input type="text" class="form-control" name="produto_categoria" value="<?php echo $i['categoria'] ?>">
+                <select class="form-select" aria-label="Default select example" name="produto_categoria" required>
+                    <option disabled selected value="">Selecione a categoria</option>
+                    <option value="Pães">Pães</option>
+                    <option value="Bolos">Bolos</option>
+                    <option value="Salgados">Salgados</option>
+                    <option value="Doces">Doces</option>
+                    <option value="Bolos">Bolos</option>
+                    <option value="Tortas">Tortas</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Quantidade em Estoque</label>
-                <input type="text" class="form-control" name="produto_estoque" placeholder="Ex: 2000" value="<?php echo $i['quantidadeEstoque'] ?>">
+                <input type="text" class="form-control" name="produto_estoque" placeholder="Ex: 2000" value="<?php echo $i['quantidade_em_estoque'] ?>">
             </div>
             <button type="submit" class="btn btn-primary">Editar Produto</button>
             </fieldset>

@@ -21,9 +21,9 @@ function insertFuncionario($id, $cpf, $nome, $telefone, $salario, $cargo) {
     mysqli_close($conexao);
 }
 
-function insertProduto($codigo, $nome, $preco, $categoria, $quantidadeEstoque) {
+function insertProduto($codigo, $nome, $preco, $categoria, $quantidade_em_estoque) {
     $conexao = conexaoMYSQL();
-    $query = "INSERT INTO produto(codigo, nome, preco, categoria, quantidadeEstoque) VALUES({$codigo}, '{$nome}', {$preco}, '{$categoria}', {$quantidadeEstoque})";
+    $query = "INSERT INTO produto(codigo, nome, preco, categoria, quantidade_em_estoque) VALUES({$codigo}, '{$nome}', {$preco}, '{$categoria}', {$quantidade_em_estoque})";
 
     mysqli_query($conexao, $query);
     mysqli_close($conexao);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../imgs/person-solid.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="../icons/shop-window.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Produtos</title>
 </head>
@@ -65,7 +65,7 @@
                     <td scope="row"><?php echo $i['nome'];?></td>
                     <td scope="row"><?php echo "R$ ".$i['preco'];?></td>
                     <td scope="row"><?php echo $i['categoria'];?></td>
-                    <td scope="row"><?php echo $i['quantidadeEstoque'];?></td>
+                    <td scope="row"><?php echo $i['quantidade_em_estoque'];?></td>
                     <td scope="row"><a href="<?php echo "./produtoFormUpdate.php? var_id=".$i['codigo']?>">Editar</a></td>
                     <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['codigo']."&tabela=produtos"?>">Excluir</a></td>
                 </tr>
