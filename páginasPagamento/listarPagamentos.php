@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../icons/receipt.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Vendas</title>
+    <title>Pagamentos</title>
 </head>
 <body>
 
+    <?php
+
+    $codigoVenda = filter_input(INPUT_GET, "var_codigo_venda");
+    $idCLiente = filter_input(INPUT_GET, "var_id_cliente");
+
+    ?>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Lista de Vendas</a>
+          <a class="navbar-brand" href="#">Pagamentos da Venda</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,7 +28,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./vendaFormInsert.php">Nova Venda</a>
+                <a class="nav-link" href="<?php echo "./pagamentoFormInsert.php? var_codigo_venda=".$codigoVenda."&var_id_cliente=".$idCLiente ?>">Novo Pagamento</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -36,13 +42,12 @@
         <table class="table table-dark table-striped" id="tabela_Clientes">
             <thead>
                 <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Valor Total</th>
-                    <th scope="col">Quantidade Total</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Valor Pago</th>
+                    <th scope="col">Data Pagamento</th>
+                    <th scope="col">Forma Pagamento</th>
                     <th scope="col">ID do Cliente</th>
-                    <th scope="col">ID do Funcionário</th>
-                    <th scope="col">Itens da Venda</th>
-                    <th scope="col">Pagamento</th>
+                    <th scope="col">ID da Venda</th>
                     <th scope="col">Editar?</th>
                     <th scope="col">Excluir?</th>
                 </tr>
@@ -57,21 +62,27 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM venda JOIN cliente ON cliente.id = fk_cliente_id JOIN funcionario ON funcionario.id = fk_funcionario_id";
+                $codigoVenda = filter_input(INPUT_GET, "var_codigo_venda");
+                $idCLiente = filter_input(INPUT_GET, "var_id_cliente");
+
+                $query = "SELECT pagamento.id, pagamento.valor_pago, pagamento.data_pagamento, pagamento.forma_pagamento, cliente.id as cliente_id, venda.codigo as venda_codigo
+                          FROM pagamento JOIN venda on pagamento.fk_venda_codigo = venda.codigo 
+                          JOIN cliente on pagamento.fk_cliente_id = cliente.id
+                          WHERE venda.codigo = $codigoVenda";
+
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {
                 ?>
                 <tr>
-                    <th scope="row"><?php echo $i['codigo'];?></th>
-                    <td scope="row"><?php echo "R$ ".$i['valor_total'];?></td>
-                    <td scope="row"><?php echo $i['quantidade_total'];?></td>
-                    <td scope="row"><?php echo $i['fk_cliente_id'];?></td>
-                    <td scope="row"><?php echo $i['fk_funcionario_id'];?></td>
-                    <td scope="row"><a href="<?php ?>">Itens</a></td>
-                    <td scope="row"><a href="<?php echo "../páginasPagamento/listarPagamentos.php? var_codigo_venda=".$i['codigo']."&var_id_cliente=".$i['fk_cliente_id'] ?>">Ver Pagamento</a></td>
-                    <td scope="row"><a href="<?php echo "./vendaFormUpdate.php? var_id=".$i['codigo']?>">Editar</a></td>
-                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['codigo']."&tabela=vendas"?>">Excluir</a></td>
+                    <th scope="row"><?php echo $i['id'];?></th>
+                    <td scope="row"><?php echo "R$ ".$i['valor_pago'];?></td>
+                    <td scope="row"><?php echo $i['data_pagamento'];?></td>
+                    <td scope="row"><?php echo $i['forma_pagamento'];?></td>
+                    <td scope="row"><?php echo $i['cliente_id'];?></td>
+                    <td scope="row"><?php echo $i['venda_codigo'];?></td>
+                    <td scope="row"><a href="<?php echo "./vendaFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
+                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']."&tabela=pagamentos"?>">Excluir</a></td>
                 </tr>
             </tbody>
                 <?php
