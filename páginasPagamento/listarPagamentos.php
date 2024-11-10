@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Pagamentos da Venda</a>
+          <a class="navbar-brand">Pagamentos da Venda</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -27,9 +27,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo "./pagamentoFormInsert.php? var_codigo_venda=".$codigoVenda."&var_id_cliente=".$idCLiente ?>">Novo Pagamento</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../PáginasVendas/listarVendas.php">Vendas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo "./pagamentoFormInsert.php? var_codigo_venda=".$codigoVenda."&var_id_cliente=".$idCLiente ?>">Novo Pagamento</a>
+                </li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="text" placeholder="Pesquisar Venda" aria-label="Search" id="barra_Pesquisa" onkeyup="pesquisar()">
@@ -65,7 +68,7 @@
                 $codigoVenda = filter_input(INPUT_GET, "var_codigo_venda");
                 $idCLiente = filter_input(INPUT_GET, "var_id_cliente");
 
-                $query = "SELECT pagamento.id, pagamento.valor_pago, pagamento.data_pagamento, pagamento.forma_pagamento, cliente.id as cliente_id, venda.codigo as venda_codigo
+                $query = "SELECT pagamento.id, pagamento.valor_pago, pagamento.data_pagamento, pagamento.forma_pagamento, cliente.id as cliente_id, cliente.nome as nome, venda.codigo as venda_codigo
                           FROM pagamento JOIN venda on pagamento.fk_venda_codigo = venda.codigo 
                           JOIN cliente on pagamento.fk_cliente_id = cliente.id
                           WHERE venda.codigo = $codigoVenda";
@@ -79,9 +82,9 @@
                     <td scope="row"><?php echo "R$ ".$i['valor_pago'];?></td>
                     <td scope="row"><?php echo $i['data_pagamento'];?></td>
                     <td scope="row"><?php echo $i['forma_pagamento'];?></td>
-                    <td scope="row"><?php echo $i['cliente_id'];?></td>
+                    <td scope="row"><?php echo $i['cliente_id']." - ". $i['nome'];?></td>
                     <td scope="row"><?php echo $i['venda_codigo'];?></td>
-                    <td scope="row"><a href="<?php echo "./vendaFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
+                    <td scope="row"><a href="<?php echo "./pagamentoFormUpdate.php? var_id=".$i['id']?>">Editar</a></td>
                     <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['id']."&tabela=pagamentos"?>">Excluir</a></td>
                 </tr>
             </tbody>

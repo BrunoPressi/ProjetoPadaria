@@ -75,7 +75,7 @@ else if($_POST['tabela'] == 'venda') {
 }
 else if($_POST['tabela'] == 'pagamento') {
     insertPagamento($_POST['pagamento_id'], $_POST['pagamento_valorTotal'], $_POST['pagamento_data'], $_POST['pagamento_forma'], $_POST['pagamento_codigo_cliente'], $_POST['pagamento_codigo_venda']);
-    header("Location: ../páginasPagamento/listarPagamentos.php");
+    header("Location: ../PáginasVendas/listarVendas.php");
 }
 
 ?>

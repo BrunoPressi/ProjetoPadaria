@@ -57,7 +57,7 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM venda JOIN cliente ON cliente.id = fk_cliente_id JOIN funcionario ON funcionario.id = fk_funcionario_id";
+                $query = "SELECT *, cliente.nome AS nome, funcionario.nome AS nomeFunc FROM venda JOIN cliente ON cliente.id = fk_cliente_id JOIN funcionario ON funcionario.id = fk_funcionario_id";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {
@@ -66,8 +66,8 @@
                     <th scope="row"><?php echo $i['codigo'];?></th>
                     <td scope="row"><?php echo "R$ ".$i['valor_total'];?></td>
                     <td scope="row"><?php echo $i['quantidade_total'];?></td>
-                    <td scope="row"><?php echo $i['fk_cliente_id'];?></td>
-                    <td scope="row"><?php echo $i['fk_funcionario_id'];?></td>
+                    <td scope="row"><?php echo $i['fk_cliente_id']." - ".$i['nome'];?></td>
+                    <td scope="row"><?php echo $i['fk_funcionario_id']." - ".$i['nomeFunc'];?></td>
                     <td scope="row"><a href="<?php ?>">Itens</a></td>
                     <td scope="row"><a href="<?php echo "../páginasPagamento/listarPagamentos.php? var_codigo_venda=".$i['codigo']."&var_id_cliente=".$i['fk_cliente_id'] ?>">Ver Pagamento</a></td>
                     <td scope="row"><a href="<?php echo "./vendaFormUpdate.php? var_id=".$i['codigo']?>">Editar</a></td>

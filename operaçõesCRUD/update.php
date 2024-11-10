@@ -45,6 +45,17 @@ function atualizarVenda($codigo, $valor_total, $quantidade_total, $fk_cliente_id
 
 #--------------------------------
 
+function atualizarPagamento($id, $valor_pago, $data_pagamento, $forma_pagamento, $fk_cliente_id, $fk_venda_codigo) {
+    $conexao = conexaoMYSQL();
+
+    $query = "UPDATE pagamento SET valor_pago = {$valor_pago}, data_pagamento = '{$data_pagamento}', forma_pagamento = '{$forma_pagamento}', fk_cliente_id = {$fk_cliente_id}, fk_venda_codigo = {$fk_venda_codigo} WHERE id = {$id}";
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+#--------------------------------
+
+
 if($_POST['tabela'] === 'cliente') {
     atualizarCliente($_POST['cliente_id'], $_POST['cliente_nome'], $_POST['cliente_telefone']);
     header("Location: ../páginasClientes/listarClientes.php");
@@ -61,5 +72,8 @@ else if($_POST['tabela'] === 'vendas') {
     atualizarVenda($_POST['venda_codigo'], $_POST['venda_valor_total'], $_POST['venda_quantidade_total'], $_POST['venda_cliente_id'], $_POST['venda_funcionario_id']);
     header("Location: ../PáginasVendas/listarVendas.php");
 }
-
+else if($_POST['tabela'] === 'pagamentos') {
+    atualizarPagamento($_POST['pagamento_id'], $_POST['pagamento_valor_pago'], $_POST['pagamento_data'], $_POST['pagamento_forma'], $_POST['pagamento_cliente'], $_POST['pagamento_codigo_venda']);
+    header("Location: ../PáginasVendas/listarVendas.php");
+}
 ?>
