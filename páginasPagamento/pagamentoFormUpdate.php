@@ -72,7 +72,7 @@
             <div class="mb-3">
                 <label class="form-label">Forma do Pagamento</label>
                 <select class="form-select" aria-label="Default select example" name="pagamento_forma" required>
-                    <option <?php echo $i['forma_pagamento']?>>Selecione a forma de pagamento</option>
+                    <option disabled selected value="">Selecione a forma de pagamento</option>
                     <option value="cartão">Cartão</option>
                     <option value="dinheiro">Dinheiro</option>
                     <option value="pix">Pix</option>

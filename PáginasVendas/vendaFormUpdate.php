@@ -36,19 +36,17 @@
 
     $codigo_venda = filter_input(INPUT_GET, "var_id");
 
-    $query = "SELECT * FROM venda WHERE codigo = $codigo_venda";
+    $query = "SELECT *, cliente.nome AS cliente_nome, funcionario.nome AS funcionario_nome
+              FROM venda JOIN cliente ON cliente.id = venda.fk_cliente_id 
+              JOIN funcionario ON funcionario.id = venda.fk_funcionario_id 
+              WHERE codigo = $codigo_venda";
+
     $result = mysqli_query($conexao, $query);
     $i = mysqli_fetch_assoc($result);
 
     if($i === null) {
         $i['codigo'] = 0;
     }
-
-    $query2 = "SELECT id, nome FROM cliente";
-    $result2 = mysqli_query($conexao, $query2);
-
-    $query3 = "SELECT id, nome FROM funcionario WHERE cargo = 'Caixa'";
-    $result3 = mysqli_query($conexao, $query3);
 
     ?>
     
@@ -59,7 +57,7 @@
             <input type="hidden" name="tabela" value="vendas">
             <div class="mb-3">
                 <label class="form-label">Código</label>
-                <input type="text" class="form-control" name="venda_codigo" placeholder="Preencha com o Código" value="<?php echo $i['codigo']?>" required readonly>
+                <input type="text" class="form-control" name="venda_codigo" placeholder="Preencha com o Código" value="<?php echo $i['codigo']?>" readonly>
             </div>
             <div class="mb-3">
                 <label class="form-label">Valor Total</label>
@@ -70,32 +68,12 @@
                 <input type="text" class="form-control" name="venda_quantidade_total" placeholder="Preencha com o total" value="<?php echo $i['quantidade_total']?>" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Cliente</label>
-                <select class="form-select" aria-label="Default select example" name="venda_cliente_id" required>
-                    <option value="<?php echo $i['fk_cliente_id']?>">Selecione o Cliente</option>
-                    <?php
-                    while($j = mysqli_fetch_assoc($result2)) {
-                        // loop do cliente
-                    ?>
-                    <option name="venda_cliente_id" value="<?php echo $j['id'];?>"><?php echo $j['id']." - ".$j['nome'];?></option>
-                    <?php
-                    } // final loop cliente
-                    ?>
-                </select>
+                <label class="form-label">Cliente: <?php echo $i['cliente_nome']?></label>
+                <input type="text" class="form-control" name="venda_cliente_id" placeholder="Preencha com o total" value="<?php echo $i['fk_cliente_id']?>" readonly>
             </div>
             <div class="mb-3">
-                <label class="form-label">Atendente Responsável</label>
-                <select class="form-select" aria-label="Default select example" name="venda_funcionario_id" required>
-                    <option value="<?php echo $i['fk_funcionario_id']?>">Selecione o Atendente</option>
-                    <?php
-                    while($k = mysqli_fetch_assoc($result3)) {
-                        // loop do funcionário
-                    ?>
-                    <option name="venda_funcionario_id" value="<?php echo $k['id'];?>"><?php echo $k['id']." - ".$k['nome'];?></option>
-                    <?php
-                    } // final do loop funcionário
-                    ?>
-                </select>
+                <label class="form-label">Atendente Responsável: <?php echo $i['funcionario_nome']?></label>
+                <input type="text" class="form-control" name="venda_funcionario_id" placeholder="Preencha com o total" value="<?php echo $i['fk_funcionario_id']?>" readonly>
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             </fieldset>

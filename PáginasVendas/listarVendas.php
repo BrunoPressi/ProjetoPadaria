@@ -38,7 +38,7 @@
                 <tr>
                     <th scope="col">Código</th>
                     <th scope="col">Valor Total</th>
-                    <th scope="col">Quantidade Total</th>
+                    <th scope="col">Quantidade Total de Itens</th>
                     <th scope="col">ID do Cliente</th>
                     <th scope="col">ID do Funcionário</th>
                     <th scope="col">Itens da Venda</th>
@@ -68,7 +68,7 @@
                     <td scope="row"><?php echo $i['quantidade_total'];?></td>
                     <td scope="row"><?php echo $i['fk_cliente_id']." - ".$i['nome'];?></td>
                     <td scope="row"><?php echo $i['fk_funcionario_id']." - ".$i['nomeFunc'];?></td>
-                    <td scope="row"><a href="<?php ?>">Itens</a></td>
+                    <td scope="row"><a href="<?php echo "../páginasItens/listarItens.php? var_codigo_venda=".$i['codigo']?>">Itens</a></td>
                     <td scope="row"><a href="<?php echo "../páginasPagamento/listarPagamentos.php? var_codigo_venda=".$i['codigo']."&var_id_cliente=".$i['fk_cliente_id'] ?>">Ver Pagamento</a></td>
                     <td scope="row"><a href="<?php echo "./vendaFormUpdate.php? var_id=".$i['codigo']?>">Editar</a></td>
                     <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['codigo']."&tabela=vendas"?>">Excluir</a></td>
