@@ -57,6 +57,16 @@ function insertPagamento($id, $valor_pago, $data_pagamento, $forma_pagamento, $f
 
 #--------------------------------
 
+function insertItensVenda($codigo_produto, $codigo_venda, $quantidade, $valor_unitario) {
+    $conexao = conexaoMYSQL();
+    $query = "INSERT INTO itens_venda(codigo_produto, codigo_venda, quantidade, valor_unitario) VALUES ($codigo_produto, $codigo_venda, $quantidade, $valor_unitario)";
+
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+#--------------------------------
+
 if($_POST['tabela'] == 'cliente') {
     insertCliente($_POST['cliente_id'], $_POST['cliente_cpf'], $_POST['cliente_nome'], $_POST['cliente_telefone']);
     header('Location: ../páginasClientes/listarClientes.php');
@@ -75,6 +85,10 @@ else if($_POST['tabela'] == 'venda') {
 }
 else if($_POST['tabela'] == 'pagamento') {
     insertPagamento($_POST['pagamento_id'], $_POST['pagamento_valorTotal'], $_POST['pagamento_data'], $_POST['pagamento_forma'], $_POST['pagamento_codigo_cliente'], $_POST['pagamento_codigo_venda']);
+    header("Location: ../PáginasVendas/listarVendas.php");
+}
+else if($_POST['tabela'] == "itens_venda") {
+    insertItensVenda($_POST['itens_venda_codigo_produto'], $_POST['itens_venda_codigo'], $_POST['itens_venda_quantidade'], $_POST['itens_venda_quantidade']);
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 

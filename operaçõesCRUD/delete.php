@@ -65,6 +65,18 @@ function deletePagamento($id) {
 
 #--------------------------------
 
+function deleteItensVenda($id) {
+    $conexao = conexaoMYSQL();
+
+    $query = "DELETE FROM itens_venda WHERE codigo_venda = {$id}";
+
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+#--------------------------------
+
+
 if($tabela === "clientes") {
     deleteCliente($id);
     header("Location: ../páginasClientes/listarClientes.php");
@@ -83,6 +95,10 @@ else if($tabela === "vendas") {
 }
 else if($tabela === "pagamentos") {
     deletePagamento($id);
+    header("Location: ../PáginasVendas/listarVendas.php");
+}
+else if($tabela === "itens_venda") {
+    deleteItensVenda($id);
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 
