@@ -7,6 +7,7 @@ include_once("../conexao.php");
 
 $tabela = (string) filter_input(INPUT_GET, 'tabela');
 $id = filter_input(INPUT_GET, 'var_id');
+$codigo_produto = filter_input(INPUT_GET,"codigo_produto");
 
 #--------------------------------
 
@@ -65,10 +66,10 @@ function deletePagamento($id) {
 
 #--------------------------------
 
-function deleteItensVenda($id) {
+function deleteItensVenda($id, $codigo_produto) {
     $conexao = conexaoMYSQL();
 
-    $query = "DELETE FROM itens_venda WHERE codigo_venda = {$id}";
+    $query = "DELETE FROM itens_venda WHERE codigo_venda = {$id} AND codigo_produto = $codigo_produto";
 
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
@@ -98,7 +99,7 @@ else if($tabela === "pagamentos") {
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 else if($tabela === "itens_venda") {
-    deleteItensVenda($id);
+    deleteItensVenda($id, $codigo_produto);
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 

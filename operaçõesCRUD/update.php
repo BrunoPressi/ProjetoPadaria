@@ -55,6 +55,15 @@ function atualizarPagamento($id, $valor_pago, $data_pagamento, $forma_pagamento,
 
 #--------------------------------
 
+function atualizarItemVenda($codigoProduto, $codigo_venda, $quantidade, $valor_unitario) {
+    $conexao = conexaoMYSQL();
+
+    $query = "UPDATE itens_venda SET quantidade = {$quantidade}, valor_unitario = {$valor_unitario} WHERE codigo_venda = {$codigo_venda} AND codigo_produto = {$codigoProduto}";
+    mysqli_query($conexao, $query);
+    mysqli_close($conexao);
+}
+
+#--------------------------------
 
 if($_POST['tabela'] === 'cliente') {
     atualizarCliente($_POST['cliente_id'], $_POST['cliente_nome'], $_POST['cliente_telefone']);
@@ -74,6 +83,10 @@ else if($_POST['tabela'] === 'vendas') {
 }
 else if($_POST['tabela'] === 'pagamentos') {
     atualizarPagamento($_POST['pagamento_id'], $_POST['pagamento_valor_pago'], $_POST['pagamento_data'], $_POST['pagamento_forma'], $_POST['pagamento_cliente'], $_POST['pagamento_codigo_venda']);
+    header("Location: ../PáginasVendas/listarVendas.php");
+}
+else if($_POST['tabela'] === 'itens_venda') {
+    atualizarItemVenda($_POST['itens_venda_codigo_produto'], $_POST['itens_venda_codigo'], $_POST['itens_venda_quantidade'], $_POST['itens_venda_valor_unitario']);
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 ?>

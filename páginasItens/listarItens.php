@@ -31,9 +31,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo "./itemFormInsert.php? var_codigo_venda=".$codigo_venda?>">Adicionar novo item</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../PáginasVendas/listarVendas.php">Vendas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo "./itemFormInsert.php? var_codigo_venda=".$codigo_venda?>">Adicionar novo item</a>
+                </li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="text" placeholder="Pesquisar Item" aria-label="Search" id="barra_Pesquisa" onkeyup="pesquisar()">
@@ -77,8 +80,8 @@
                     <td scope="row"><?php echo $i['codigo_venda'];?></td>
                     <td scope="row"><?php echo $i['quantidade'];?></td>
                     <td scope="row"><?php echo $i['valor_unitario'];?></td>
-                    <td scope="row"><a href="<?php echo "./vendaFormUpdate.php? var_id=".$i['codigo']?>">Editar</a></td>
-                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['codigo_venda']."&tabela=itens_venda"?>">Excluir</a></td>
+                    <td scope="row"><a href="<?php echo "./itemFormUpdate.php? var_codigo_venda=".$i['codigo_venda']."&codigo_produto=".$i['codigo_produto']?>">Editar</a></td>
+                    <td scope="row"><a href="<?php echo "../operaçõesCRUD/delete.php? var_id=".$i['codigo_venda']."&tabela=itens_venda"."&codigo_produto=".$i['codigo_produto']?>">Excluir</a></td>
                 </tr>
             </tbody>
                 <?php

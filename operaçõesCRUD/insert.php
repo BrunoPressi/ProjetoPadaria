@@ -88,7 +88,7 @@ else if($_POST['tabela'] == 'pagamento') {
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 else if($_POST['tabela'] == "itens_venda") {
-    insertItensVenda($_POST['itens_venda_codigo_produto'], $_POST['itens_venda_codigo'], $_POST['itens_venda_quantidade'], $_POST['itens_venda_quantidade']);
+    insertItensVenda($_POST['itens_venda_codigo_produto'], $_POST['itens_venda_codigo'], $_POST['itens_venda_quantidade'], $_POST['itens_venda_valor_unitario']);
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 

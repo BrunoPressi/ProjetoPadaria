@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../icons/address-card-solid.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Cadastro de Itens</title>
+    <title>Edição de Itens da Venda</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="./listarVendas.php">Vendas</a>
+                <a class="nav-link" href="../PáginasVendas/listarVendas.php">Vendas</a>
               </li>
             </ul>
           </div>
@@ -35,12 +35,21 @@
     $conexao = conexaoMYSQL();
 
     $codigo_venda = filter_input(INPUT_GET, "var_codigo_venda");
+    $codigo_produto = filter_input(INPUT_GET, "codigo_produto");
 
     $query = "SELECT * FROM produto";
     $result = mysqli_query($conexao, $query);
 
     $query2 = "SELECT preco, codigo FROM produto";
     $result2 = mysqli_query($conexao, $query2);
+
+    $query3 = "SELECT * FROM itens_venda WHERE codigo_venda = $codigo_venda AND codigo_produto = $codigo_produto";
+    $result3 = mysqli_query($conexao, $query3);
+    $b = mysqli_fetch_assoc($result3);
+
+    $query4 = "SELECT nome, codigo FROM produto WHERE codigo = $codigo_produto";
+    $result4 = mysqli_query($conexao, $query4);
+    $c = mysqli_fetch_assoc($result4);
 
     $produtos = [];
 
@@ -54,18 +63,18 @@
 
     
     <div class="d-flex justify-content-center">
-        <form method="POST" action="../operaçõesCRUD/insert.php">
+        <form method="POST" action="../operaçõesCRUD/update.php">
             <fieldset>
-            <legend class="m-4">Cadastrar Item</legend>
+            <legend class="m-4">Editar Item da Venda</legend>
             <input type="hidden" name="tabela" value="itens_venda">
             <div class="mb-3">
                 <label class="form-label">Código Venda</label>
-                <input type="text" class="form-control" name="itens_venda_codigo" placeholder="Preencha com o Código" value="<?php echo $codigo_venda?>" readonly>
+                <input type="text" class="form-control" name="itens_venda_codigo" placeholder="Preencha com o Código" value="<?php echo $b['codigo_venda']?>" readonly>
             </div>
             <div class="mb-3">
                 <label class="form-label">Código do Produto</label>
                 <select id="codigo_produto" class="form-select" aria-label="Default select example" name="itens_venda_codigo_produto" required>
-                    <option disabled selected value="">Selecione o Produto</option>
+                    <option value="<?php echo $b['codigo_produto']?>"><?php echo $c['codigo']." - ".$c['nome']?></option>
                     <?php
                     while($j = mysqli_fetch_assoc($result)) {
                         // loop dos produtos
@@ -78,13 +87,13 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Quantidade</label>
-                <input type="text" class="form-control" name="itens_venda_quantidade" placeholder="Preencha com a quantidade" required>
+                <input type="text" class="form-control" name="itens_venda_quantidade" placeholder="Preencha com a quantidade" value="<?php echo $b['quantidade'];?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Valor unitário</label>
-                <input type="text" id="valor_unitario" class="form-control" name="itens_venda_valor_unitario" placeholder="Preencha com o valor unitário" readonly required>
+                <input type="text" id="valor_unitario" class="form-control" name="itens_venda_valor_unitario" placeholder="Preencha com o valor unitário" value="<?php echo $b['valor_unitario'];?>" required>
             </div>
-            <button type="submit" class="btn btn-primary" >Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Editar Item</button>
             </fieldset>
         </form>
     </div>
@@ -100,8 +109,8 @@
 
             const produtoSelecionado = produtos.find(produto => produto.codigo == codigoProduto);
 
-            console.log(codigoProduto);
-            console.log(produtoSelecionado);
+            //console.log(codigoProduto);
+            //console.log(produtoSelecionado);
 
             if (produtoSelecionado) {
                 document.getElementById("valor_unitario").value = produtoSelecionado.preco;
