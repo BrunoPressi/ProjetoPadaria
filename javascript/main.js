@@ -1,4 +1,4 @@
-function pesquisar() {
+function pesquisar(){
     const input = document.getElementById("barra_Pesquisa").value.toLowerCase();
     const tabela = document.getElementById("tabela_Clientes");
     const linhas = tabela.getElementsByTagName("tr");

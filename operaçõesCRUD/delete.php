@@ -79,20 +79,53 @@ function deleteItensVenda($id, $codigo_produto) {
 
 
 if($tabela === "clientes") {
-    deleteCliente($id);
-    header("Location: ../páginasClientes/listarClientes.php");
+    try {
+        deleteCliente($id);
+        header("Location: ../páginasClientes/listarClientes.php");
+    } catch (mysqli_sql_exception $erro) {
+        if ($erro -> getCode() == '1451') {
+            echo "Não é possível excluir esse cliente, pois, o mesmo está relacionado a determinadas vendas!!";
+        } else {
+            echo "Erro inesperado: ". $erro->getMessage();
+        }
+    }
 }
 else if($tabela === "funcionarios") {
-    deleteFuncionario($id);
-    header("Location: ../páginasFuncionários/listarFuncionarios.php");
+    try {
+        deleteFuncionario($id);
+        header("Location: ../páginasFuncionários/listarFuncionarios.php");
+    } catch (mysqli_sql_exception $erro) {
+        if ($erro -> getCode() == '1451') {
+            echo "Não é possível excluir esse funcionários, pois, o mesmo está relacionado a determinadas vendas!!";
+        } else {
+            echo "Erro inesperado: ". $erro->getMessage();
+        }
+    }
+    
 }
 else if($tabela === "produtos") {
-    deleteProduto($id);
-    header("Location: ../páginasProdutos/listarProdutos.php");
+    try {
+        deleteProduto($id);
+        header("Location: ../páginasProdutos/listarProdutos.php");
+    } catch (mysqli_sql_exception $erro) {
+        if ($erro -> getCode() == '1451') {
+            echo "Não é possível excluir esse produto, pois, o mesmo está relacionado a determinadas vendas!!";
+        } else {
+            echo "Erro inesperado: ". $erro->getMessage();
+        }
+    }
 }
 else if($tabela === "vendas") {
-    deleteVenda($id);
-    header("Location: ../PáginasVendas/listarVendas.php");
+    try {
+        deleteVenda($id);
+        header("Location: ../PáginasVendas/listarVendas.php");
+    } catch (mysqli_sql_exception $erro) {
+        if ($erro -> getCode() == '1451') {
+            echo "Não é possível excluir essa venda, pois, a mesma está relacionado a determinados itens e pagamentos!";
+        } else {
+            echo "Erro inesperado: ". $erro->getMessage();
+        }
+    }
 }
 else if($tabela === "pagamentos") {
     deletePagamento($id);

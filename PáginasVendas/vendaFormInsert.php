@@ -11,7 +11,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Cadastro de Vendas</a>
+          <a class="navbar-brand">Cadastro de Vendas</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -45,7 +45,7 @@
     $query2 = "SELECT id, nome FROM cliente";
     $result2 = mysqli_query($conexao, $query2);
 
-    $query3 = "SELECT id, nome FROM funcionario WHERE cargo = 'Caixa'";
+    $query3 = "SELECT id, nome FROM funcionario WHERE cargo = 'Atendente'";
     $result3 = mysqli_query($conexao, $query3);
 
     ?>
@@ -61,11 +61,11 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Valor Total</label>
-                <input type="text" class="form-control" name="venda_valor_total" placeholder="Preencha com o valor" required>
+                <input type="text" class="form-control" name="venda_valor_total" placeholder="Preencha com o valor" value="0.00" readonly required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Quantidade Total</label>
-                <input type="text" class="form-control" name="venda_quantidade_total" placeholder="Preencha com o total" required>
+                <input type="text" class="form-control" name="venda_quantidade_total" placeholder="Preencha com o total" value="0" readonly required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Cliente</label>

@@ -71,7 +71,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Salário</label>
-                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+$" placeholder="Ex: 2.500,00" required required>
+                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+$" placeholder="Ex: 2500"  required>
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             </fieldset>

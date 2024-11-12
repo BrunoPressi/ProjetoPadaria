@@ -75,7 +75,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Quantidade em Estoque</label>
-                <input class="form-control" name="produto_quantidade" placeholder="Ex: 200">
+                <input class="form-control" name="produto_quantidade" placeholder="Ex: 200" required>
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             </fieldset>

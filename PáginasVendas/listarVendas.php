@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Lista de Vendas</a>
+          <a class="navbar-brand">Lista de Vendas</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -57,7 +57,10 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT *, cliente.nome AS nome, funcionario.nome AS nomeFunc FROM venda JOIN cliente ON cliente.id = fk_cliente_id JOIN funcionario ON funcionario.id = fk_funcionario_id";
+                $query = "SELECT *, cliente.nome AS nome, funcionario.nome AS nomeFunc 
+                          FROM venda JOIN cliente ON cliente.id = fk_cliente_id 
+                          JOIN funcionario ON funcionario.id = fk_funcionario_id
+                          ORDER BY venda.codigo";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {

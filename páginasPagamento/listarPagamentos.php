@@ -71,7 +71,8 @@
                 $query = "SELECT pagamento.id, pagamento.valor_pago, pagamento.data_pagamento, pagamento.forma_pagamento, cliente.id as cliente_id, cliente.nome as nome, venda.codigo as venda_codigo
                           FROM pagamento JOIN venda on pagamento.fk_venda_codigo = venda.codigo 
                           JOIN cliente on pagamento.fk_cliente_id = cliente.id
-                          WHERE venda.codigo = $codigoVenda";
+                          WHERE venda.codigo = $codigoVenda
+                          ORDER BY pagamento.id";
 
                 $resultado = mysqli_query($conexao, $query);
 

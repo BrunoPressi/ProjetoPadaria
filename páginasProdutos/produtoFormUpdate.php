@@ -65,7 +65,7 @@
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
                 <select class="form-select" aria-label="Default select example" name="produto_categoria" required>
-                    <option disabled selected value="">Selecione a categoria</option>
+                    <option value="<?php echo $i['categoria']?>"><?php echo $i['categoria'] ?></option>
                     <option value="Pães">Pães</option>
                     <option value="Bolos">Bolos</option>
                     <option value="Salgados">Salgados</option>

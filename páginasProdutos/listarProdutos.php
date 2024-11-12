@@ -55,7 +55,7 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM produto";
+                $query = "SELECT * FROM produto ORDER BY codigo";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {

@@ -2,7 +2,7 @@
 
 function conexaoMYSQL() {
     $servername = "localhost";
-    $database = "projeto_padaria";
+    $database = "projetopadaria";
     $username = "root";
     $userpassword = "";
 

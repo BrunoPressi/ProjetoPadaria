@@ -48,7 +48,7 @@
     $codigoVenda = filter_input(INPUT_GET, "var_codigo_venda");
     $idCLiente = filter_input(INPUT_GET, "var_id_cliente");
 
-    $query2 = "SELECT cliente.id as id, venda.codigo as codigo
+    $query2 = "SELECT cliente.id as id, venda.codigo as codigo, venda.valor_total as valor_total
                FROM cliente JOIN venda ON venda.fk_cliente_id = cliente.id
                WHERE venda.codigo = $codigoVenda";
 
@@ -68,7 +68,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Valor Pago</label>
-                <input type="text" class="form-control" name="pagamento_valorTotal" placeholder="Preencha com o valor pago" required>
+                <input type="text" class="form-control" name="pagamento_valorTotal" placeholder="Preencha com o valor pago" value="<?php echo $j['valor_total'] ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Data do Pagamento</label>

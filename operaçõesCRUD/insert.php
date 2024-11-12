@@ -88,7 +88,26 @@ else if($_POST['tabela'] == 'pagamento') {
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 else if($_POST['tabela'] == "itens_venda") {
+    $conexao = conexaoMYSQL();
+
     insertItensVenda($_POST['itens_venda_codigo_produto'], $_POST['itens_venda_codigo'], $_POST['itens_venda_quantidade'], $_POST['itens_venda_valor_unitario']);
+
+    $codigo_venda = $_POST['itens_venda_codigo'];
+    $query4 = "SELECT quantidade, valor_unitario FROM itens_venda WHERE codigo_venda = $codigo_venda";
+    $result4= mysqli_query($conexao, $query4);
+
+    $totalQuantidade = 0;
+    $valorTotal = 0;
+
+    while($j = mysqli_fetch_assoc($result4)) {
+        $totalQuantidade += $j['quantidade'];
+        $valorTotal += $j['valor_unitario'] * $j['quantidade'];
+
+    }
+
+    $query3 = "UPDATE venda SET valor_total = $valorTotal, quantidade_total = $totalQuantidade WHERE codigo = $codigo_venda";
+    mysqli_query($conexao, $query3);
+
     header("Location: ../PáginasVendas/listarVendas.php");
 }
 

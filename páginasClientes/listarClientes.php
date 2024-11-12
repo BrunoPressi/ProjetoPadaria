@@ -51,7 +51,7 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM cliente";
+                $query = "SELECT * FROM cliente ORDER BY id";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {

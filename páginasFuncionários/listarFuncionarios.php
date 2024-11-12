@@ -56,7 +56,7 @@
                         
                 $conexao = conexaoMYSQL();
 
-                $query = "SELECT * FROM funcionario";
+                $query = "SELECT * FROM funcionario ORDER BY id";
                 $resultado = mysqli_query($conexao, $query);
 
                 while($i = mysqli_fetch_assoc($resultado)) {
