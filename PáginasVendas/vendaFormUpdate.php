@@ -65,7 +65,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Quantidade Total</label>
-                <input type="text" class="form-control" name="venda_quantidade_total" placeholder="Preencha com o total" value="<?php echo $i['quantidade_total']?>" required>
+                <input type="text" class="form-control" name="venda_quantidade_total" placeholder="Preencha com o total" value="<?php echo $i['quantidade_total']?>" readonly required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Cliente: <?php echo $i['cliente_nome']?></label>
