@@ -60,7 +60,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Preço</label>
-                <input type="text" class="form-control" name="produto_preco" value="<?php echo $i['preco']?>">
+                <input type="text" class="form-control" name="produto_preco" value="<?php echo $i['preco']?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
@@ -76,7 +76,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Quantidade em Estoque</label>
-                <input type="text" class="form-control" name="produto_estoque" placeholder="Ex: 2000" value="<?php echo $i['quantidade_em_estoque'] ?>">
+                <input type="text" class="form-control" name="produto_estoque" placeholder="Ex: 2000" value="<?php echo $i['quantidade_em_estoque'] ?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Editar Produto</button>
             </fieldset>

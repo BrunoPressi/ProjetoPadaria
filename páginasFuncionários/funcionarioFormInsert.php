@@ -63,15 +63,15 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Telefone</label>
-                <input type="text" class="form-control" name="funcionario_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999">
+                <input type="text" class="form-control" name="funcionario_telefone" pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(99) 99999-9999" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Cargo</label>
-                <input type="text" class="form-control" name="funcionario_cargo" placeholder="Ex: Atendente">
+                <input type="text" class="form-control" name="funcionario_cargo" placeholder="Ex: Atendente" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Salário</label>
-                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+$" placeholder="Ex: 2500"  required>
+                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+(\.\d{1,2})?$" placeholder="Ex: 2500"  required>
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             </fieldset>

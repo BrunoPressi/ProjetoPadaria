@@ -71,7 +71,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Salário</label>
-                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+$" placeholder="Ex: 2000" value="<?php echo $i['salario'] ?>">
+                <input type="text" class="form-control" name="funcionario_salario" pattern="^\d+(\.\d{1,2})?$" placeholder="Ex: 2000" value="<?php echo $i['salario'] ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Cargo</label>

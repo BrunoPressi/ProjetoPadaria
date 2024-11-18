@@ -13,6 +13,7 @@ function insertCliente($id, $cpf, $nome, $telefone) {
 
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
+
 }
 
 #--------------------------------
@@ -72,8 +73,18 @@ if($_POST['tabela'] == 'cliente') {
     header('Location: ../páginasClientes/listarClientes.php');
 }
 else if($_POST['tabela'] == 'funcionário') {
-    insertFuncionario($_POST['funcionario_id'], $_POST['funcionario_cpf'], $_POST['funcionario_nome'], $_POST['funcionario_telefone'], $_POST['funcionario_salario'], $_POST['funcionario_cargo']);
-    header('Location: ../páginasFuncionários/listarFuncionarios.php');
+
+    try {
+        insertFuncionario($_POST['funcionario_id'], $_POST['funcionario_cpf'], $_POST['funcionario_nome'], $_POST['funcionario_telefone'], $_POST['funcionario_salario'], $_POST['funcionario_cargo']);
+        header('Location: ../páginasFuncionários/listarFuncionarios.php');
+    } catch (mysqli_sql_exception $error) {
+        //echo $error->getCode();
+        if ($error->getCode() == "1062") {
+            echo "O CPF informado já está cadastrado!";
+        } else {
+            echo "Erro inesperado: ". $error->getMessage();
+        }
+    }
 }
 else if($_POST['tabela'] == 'produto') {
     insertProduto($_POST['produto_codigo'], $_POST['produto_nome'], $_POST['produto_preco'], $_POST['produto_categoria'], $_POST['produto_quantidade']);

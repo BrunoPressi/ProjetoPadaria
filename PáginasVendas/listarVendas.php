@@ -40,7 +40,7 @@
                     <th scope="col">Valor Total</th>
                     <th scope="col">Quantidade Total de Itens</th>
                     <th scope="col">ID do Cliente</th>
-                    <th scope="col">ID do Funcionário</th>
+                    <th scope="col">ID do Atendente</th>
                     <th scope="col">Itens da Venda</th>
                     <th scope="col">Pagamento</th>
                     <th scope="col">Editar?</th>

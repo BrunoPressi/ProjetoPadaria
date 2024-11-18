@@ -75,7 +75,7 @@
                 <label class="form-label">Atendente Responsável: <?php echo $i['funcionario_nome']?></label>
                 <input type="text" class="form-control" name="venda_funcionario_id" placeholder="Preencha com o total" value="<?php echo $i['fk_funcionario_id']?>" readonly>
             </div>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
             </fieldset>
         </form>
     </div>

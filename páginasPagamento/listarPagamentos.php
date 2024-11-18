@@ -81,7 +81,7 @@
                 <tr>
                     <th scope="row"><?php echo $i['id'];?></th>
                     <td scope="row"><?php echo "R$ ".$i['valor_pago'];?></td>
-                    <td scope="row"><?php echo $i['data_pagamento'];?></td>
+                    <td scope="row"><?php echo implode("/",array_reverse(explode("-",$i['data_pagamento'])));?></td>
                     <td scope="row"><?php echo $i['forma_pagamento'];?></td>
                     <td scope="row"><?php echo $i['cliente_id']." - ". $i['nome'];?></td>
                     <td scope="row"><?php echo $i['venda_codigo'];?></td>
